@@ -720,6 +720,6 @@ position: static !important;   /* Cancels position: fixed from index.html */
 
 /* elevate cookie icon to above the footer */
 #stcm-icon {
-  bottom: 60px !important; 
+  bottom: 55px !important; 
   right: 15px !important;
 }
