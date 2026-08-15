@@ -8,14 +8,15 @@
 /* Wrapper (Global) */
 #stcm-wrapper {
   --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
-  --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
-  --primaryColor: #F9D000;
-  --backgroundColor: #050505;
-  --textColor: #F4F0DF;
-  --backdropBackgroundColor: #00000077;
-  --backdropBackgroundBlur: 0px;
-  --iconColor: #050505;
-  --iconBackgroundColor: #F9D000;
+  --font-family: 'Montserrat', sans-serif; 
+  --font-size: 13px; 
+  --primaryColor: #FF6699;
+  --backgroundColor: #ffffff;
+  --textColor: #253b48;
+  --backdropBackgroundColor: #00000033;
+  --backdropBackgroundBlur: 1px;
+  --iconColor: #FFFFFF;
+  --iconBackgroundColor: #FF6699;
   position: fixed;
   bottom: 0;
   right: 0;
