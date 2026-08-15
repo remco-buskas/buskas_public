@@ -8,8 +8,8 @@
 /* Wrapper (Global) */
 #stcm-wrapper {
   --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
-  --font-family: 'Montserrat', sans-serif; 
-  --font-size: 13px; 
+  --fontFamily: 'Montserrat', sans-serif; 
+  --font-size: 14px; 
   --primaryColor: #FF6699;
   --backgroundColor: #ffffff;
   --textColor: #253b48;
@@ -587,4 +587,139 @@ Animation - backdrop click feedback
     0%, 100% { opacity: 1; }
     50% { opacity: 0.85; }
   }
+}
+
+
+/* =========================================================
+   BUSKAS CUSTOM OVERRIDES - FINAL CLEAN FIX
+   ========================================================= */
+
+/* --- 1. TYPOGRAPHY & BUTTONS --- */
+#stcm-banner p,
+#stcm-modal p {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 8px !important; 
+}
+
+#stcm-wrapper .stcm-button,
+#stcm-banner .stcm-preferences-button {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 10px 20px !important;
+}
+
+#stcm-banner .stcm-preferences-button span {
+  font-weight: 700 !important;
+}
+
+#stcm-modal legend {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+/* --- 2. HEADER & CLOSE BUTTON --- */
+#stcm-modal header {
+  display: flex !important;
+  flex-direction: row !important; 
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: transparent !important;
+  border-bottom: 2px solid var(--buskas-green) !important; 
+  padding-bottom: 12px !important;
+  margin-bottom: 12px !important;
+  width: 100% !important;
+  flex: 0 0 auto !important;
+}
+
+#stcm-modal h1 {
+  font-size: 16px !important;
+  font-weight: 700 !important; 
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+#stcm-modal .stcm-modal-close {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+#stcm-modal .stcm-modal-close svg {
+  fill: #555 !important; 
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* --- 3. FOCUS RINGS --- */
+#stcm-wrapper a:focus,
+#stcm-wrapper #stcm-banner button:focus,
+#stcm-wrapper #stcm-modal button:focus,
+#stcm-wrapper #stcm-icon:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--backgroundColor), 0 0 0 4px var(--buskas-pink) !important;
+}
+
+#stcm-modal .stcm-toggle:focus-within {
+  box-shadow: 0 0 0 2px var(--backgroundColor), 0 0 0 4px var(--buskas-pink) !important;
+}
+
+/* --- 4. MODAL CONTAINER (DISPLAY CONTROLLED BY JS) --- */
+#stcm-modal {
+  max-height: 80vh !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  padding-bottom: 16px !important; 
+}
+
+#stcm-modal fieldset {
+  margin: 0 0 12px 0 !important; 
+}
+
+#stcm-modal footer {
+position: static !important;   /* Cancels position: fixed from index.html */
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  z-index: auto !important;
+  background: transparent !important;
+  border-top: 2px solid var(--buskas-green) !important;
+  padding-top: 16px !important;
+  margin-top: 16px !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+}
+
+/* --- 5. MIDDLE TEXT SCROLLING FIX --- */
+#stcm-modal section#stcm-form {
+  overflow-y: auto !important;
+  max-height: 45vh !important; 
+  padding-right: 12px !important; 
+  margin-top: 8px !important;
+}
+
+/* Pink Scrollbar */
+#stcm-modal section#stcm-form::-webkit-scrollbar {
+  width: 6px !important;
+  display: block !important;
+}
+#stcm-modal section#stcm-form::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+  border-radius: 4px !important;
+}
+#stcm-modal section#stcm-form::-webkit-scrollbar-thumb {
+  background: #FF6699 !important;
+  border-radius: 4px !important;
+}
+
+/* elevate cookie icon to above the footer */
+#stcm-icon {
+  bottom: 65px !important; 
+  right: 15px !important;
 }

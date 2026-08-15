@@ -1437,26 +1437,66 @@ class SilktideConsentManager {
 
   let consentManager;
 
-  /**
-   * Initialize the consent manager with the given configuration
-   * Destroys any existing instance and creates a new one.
-   * 
-   * @param {Object} config - Configuration object
-   */
+  // Default Buskas Configuration
+  const buskasDefaultConfig = {
+    backdrop: { show: true },
+    icon: { position: "bottomRight" },
+    prompt: { position: "bottomCenter" },
+    consentTypes: [
+      {
+        id: "essential",
+        label: "Essential",
+        description: "<p>These cookies are necessary for the Buskas website to function properly and cannot be switched off. They help with things like logging in, setting your privacy preferences and storing your favorites on your local machine.</p>",
+        required: true
+      },
+      {
+        id: "analytics",
+        label: "Analytics",
+        description: "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
+        required: false,
+        gtag: "analytics_storage"
+      },
+      {
+        id: "marketing",
+        label: "Marketing",
+        description: "<p>These cookies are used by us and our advertising partners to show you relevant ads on this site and elsewhere, and to measure how those campaigns perform.</p>",
+        required: false,
+        gtag: ["ad_storage", "ad_user_data", "ad_personalization"]
+      }
+    ],
+    text: {
+      prompt: {
+        description: "<p>Buskas uses cookies on our site to enhance your user experience, provide personalized content, and analyze our traffic.</p>",
+        acceptAllButtonText: "Accept all",
+        acceptAllButtonAccessibleLabel: "Accept all cookies",
+        rejectNonEssentialButtonText: "Reject non-essential",
+        rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
+        preferencesButtonText: "Preferences",
+        preferencesButtonAccessibleLabel: "Toggle preferences"
+      },
+      preferences: {
+        title: "Customize your cookie preferences",
+        description: "<p>Buskas respects your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+        saveButtonText: "Save and close",
+        saveButtonAccessibleLabel: "Save your cookie preferences",
+        creditLinkText: "Get this banner for free",
+        creditLinkAccessibleLabel: "Get this banner for free"
+      }
+    }
+  };
+
   function init(config = {}) {
-    // Function to create instance
     const create = () => {
-      // Destroy existing instance if present
       if (consentManager) {
         consentManager.destroy();
         consentManager = null;
       }
 
-      // Create new instance (class constructor validates config)
-      consentManager = new SilktideConsentManager(config);
+      // Merge user config with Buskas defaults
+      const finalConfig = Object.keys(config).length === 0 ? buskasDefaultConfig : { ...buskasDefaultConfig, ...config };
+      consentManager = new SilktideConsentManager(finalConfig);
     };
 
-    // Initialize immediately if DOM ready, otherwise wait
     if (document.body) {
       create();
     } else {
@@ -1464,12 +1504,6 @@ class SilktideConsentManager {
     }
   }
 
-  /**
-   * Update the configuration by deep merging with existing config
-   * Requires an existing instance to be initialized first.
-   * 
-   * @param {Object} newConfig - Partial configuration object to merge with existing config
-   */
   function update(newConfig = {}) {
     if (!consentManager) {
       console.error('Silktide Consent Manager: Cannot update - no instance initialized. Call init() first.');
@@ -1488,32 +1522,20 @@ class SilktideConsentManager {
       return output;
     }
 
-    // Deep merge new config into existing and re-initialize
     const mergedConfig = deepMerge(consentManager.config, newConfig);
     init(mergedConfig);
   }
-  
-  /**
-   * Reset all consent choices and show the prompt again
-   * Clears all localStorage entries and reinitializes as if fresh page load
-   */
+
   function resetConsent() {
     if (!consentManager) {
       console.error('Silktide Consent Manager: Cannot reset - no instance initialized.');
       return;
     }
 
-    // Clear all consent-related localStorage
     consentManager.clearAllConsents();
-
-    // Re-initialize with current config from instance
     init(consentManager.config);
   }
 
-  /**
-   * Get the current consent manager instance (for advanced usage)
-   * @returns {SilktideConsentManager|null} Current instance or null if not initialized
-   */
   function getInstance() {
     return consentManager;
   }
